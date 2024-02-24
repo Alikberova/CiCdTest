@@ -27,4 +27,4 @@ jobs:
     - name: Test
       run: dotnet test --no-build --verbosity normal
     - name: Finish
-      run: echo FINISH
+      run: echo FINISH FINISH
