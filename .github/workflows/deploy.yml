@@ -6,13 +6,15 @@ name: .NET Deployment
 on:
   push:
     branches: [ "master", "cicd" ]
-  pull_request:
-    branches: [ "master", "cicd" ]
 
 jobs:
   build:
 
     runs-on: ubuntu-latest
+    env:
+      host: ${{ secrets.HOST }}
+      username: ${{ secrets.USER_NAME }}
+      ssh_key: ${{ secrets.SSH_KEY }}
 
     steps:
     - uses: actions/checkout@v4
@@ -36,9 +38,9 @@ jobs:
     - name: Copy files to Hetzner Server
       uses: appleboy/scp-action@v0.1.7 #appleboy/scp-action@master
       with:
-        host: ${{ secrets.HOST }}
-        username: ${{ secrets.USER_NAME }}
-        key: ${{ secrets.SSH_KEY }}
+        host: ${{ env.host }}
+        username: ${{ env.username }}
+        key: ${{ env.ssh_key }}
         port: 22
         source: "build/*"
         target: "/var/myapp"
