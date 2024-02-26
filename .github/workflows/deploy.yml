@@ -15,9 +15,13 @@ jobs:
       host: ${{ secrets.HOST }}
       username: ${{ secrets.USER_NAME }}
       ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }}
+      test_var: ${{ secrets.SSH_PRIVATE_KEY }}
 
     steps:
     - uses: actions/checkout@v4
+
+    - name: ECHO
+      run: echo ${{ secrets.TEST }} / echo ${{env.test_var}}
 
     - name: Setup .NET
       uses: actions/setup-dotnet@v4
