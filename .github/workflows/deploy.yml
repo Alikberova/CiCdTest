@@ -9,9 +9,8 @@ jobs:
 
     runs-on: ubuntu-latest
     env:
-      host: ${{ secrets.HOST }}
-      username: ${{ secrets.USER_NAME }}
-      ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }}
+      app_name: CiCdTest
+      tags: alikberova/CiCdTest:latest 
 
     steps:
     - uses: actions/checkout@v4
@@ -21,25 +20,32 @@ jobs:
       with:
         dotnet-version: 8.0.x
 
-    - name: Restore dependencies
-      run: dotnet restore
+    # Optionally, restore and test your project here
 
-    - name: Build Console App
-      run: |
-        # Add commands to build your console app, for example:
-        dotnet publish -c Release -o build
-
-    - name: Test
-      run: dotnet test --no-build --verbosity normal
-
-    - name: Copy files to Hetzner Server
-      uses: appleboy/scp-action@master
+    - name: Log in to Docker Hub
+      uses: docker/login-action@v3
       with:
-        host: ${{ env.host }}
-        username: ${{ env.username }}
-        key: ${{ env.ssh_private_key }}
-        port: 22
-        source: "build/*"
-        target: "/var/myapp"
-        strip_components: 1
-        debug: true
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
+
+    - name: Build and Push Docker image
+      uses: docker/build-push-action@v2
+      with:
+        context: .
+        file: ./Dockerfile
+        push: true
+        tags: ${{ env.tags }}
+        build-args: |
+          APP_NAME=${{ env.app_name }}
+
+    - name: Deploy to Server
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.HOST }}
+        username: ${{ secrets.USER_NAME }}
+        key: ${{ secrets.SSH_PRIVATE_KEY }}
+        script: |
+          docker pull ${{ env.tags }}
+          docker stop testappcontainer || true
+          docker rm testappcontainer || true
+          docker run -d --name testappcontainer ${{ env.tags }}
