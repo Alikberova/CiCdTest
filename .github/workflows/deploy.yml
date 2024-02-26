@@ -26,10 +26,11 @@ jobs:
         echo env.host| sed -e 's/\(.\)/\1 /g'
         echo ${{ secrets.HOST }}| sed -e 's/\(.\)/\1 /g'
 
-    # - name: Early exit
-    #   run: |
-    #     gh run cancel ${{ github.run_id }}
-    #     gh run watch ${{ github.run_id }}
+    - name: Check Secret Length
+      run: |
+        echo "Host Length: ${#HOST}"
+      env:
+        HOST: ${{ secrets.HOST }}
 
     - name: Setup .NET
       uses: actions/setup-dotnet@v4
