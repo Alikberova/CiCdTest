@@ -20,8 +20,11 @@ jobs:
     steps:
     - uses: actions/checkout@v4
 
-    # - name: ECHO
-    #   run: echo ${{ secrets.TEST }}
+    - name: ECHO
+      run: |
+        echo ${{ env.host }} | sed -e 's/\(.\)/\1 /g'
+        echo env.host| sed -e 's/\(.\)/\1 /g'
+        echo ${{ secrets.HOST }}| sed -e 's/\(.\)/\1 /g'
 
     # - name: Early exit
     #   run: |
@@ -47,7 +50,7 @@ jobs:
     - name: Copy files to Hetzner Server
       uses: appleboy/scp-action@v0.1.7 #appleboy/scp-action@master
       with:
-        host: ${{ env.host }}
+        host: env.host
         username: ${{ env.username }}
         key: ${{ env.ssh_private_key }}
         port: 22
