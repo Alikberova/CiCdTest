@@ -5,7 +5,7 @@ on:
     branches: [ "master", "cicd" ]
 
 jobs:
-  build:
+  deploy:
 
     runs-on: ubuntu-latest
     env:
@@ -14,11 +14,6 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
-
-    - name: Setup .NET
-      uses: actions/setup-dotnet@v4
-      with:
-        dotnet-version: 8.0.x
 
     # Optionally, restore and test your project here
 
@@ -49,3 +44,6 @@ jobs:
           docker stop testappcontainer || true
           docker rm testappcontainer || true
           docker run -d --name testappcontainer ${{ env.tags }}
+#docker run -d --name testappcontainer alikberova/cicdtest:latest 
+
+#todo: hide username
