@@ -45,3 +45,4 @@ jobs:
         source: "build/*"
         target: "/var/myapp"
         strip_components: 1
+        debug: true
