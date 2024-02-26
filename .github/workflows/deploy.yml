@@ -24,9 +24,6 @@ jobs:
       with:
         dotnet-version: 8.0.x
 
-    - name: Ping Server
-      run: ping 5.161.114.219
-
     - name: Restore dependencies
       run: dotnet restore
 
@@ -41,7 +38,7 @@ jobs:
     - name: Copy files to Hetzner Server
       uses: appleboy/scp-action@v0.1.7 #appleboy/scp-action@master
       with:
-        host: 5.161.114.219
+        host: "${{ env.host }}"
         username: ${{ env.username }}
         key: ${{ env.ssh_private_key }}
         port: 22
