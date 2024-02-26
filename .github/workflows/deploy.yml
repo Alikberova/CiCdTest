@@ -20,13 +20,13 @@ jobs:
     steps:
     - uses: actions/checkout@v4
 
-    - name: ECHO
-      run: echo ${{ secrets.TEST }}
+    # - name: ECHO
+    #   run: echo ${{ secrets.TEST }}
 
-    - name: Early exit
-      run: |
-        gh run cancel ${{ github.run_id }}
-        gh run watch ${{ github.run_id }}
+    # - name: Early exit
+    #   run: |
+    #     gh run cancel ${{ github.run_id }}
+    #     gh run watch ${{ github.run_id }}
 
     - name: Setup .NET
       uses: actions/setup-dotnet@v4
@@ -47,7 +47,7 @@ jobs:
     - name: Copy files to Hetzner Server
       uses: appleboy/scp-action@v0.1.7 #appleboy/scp-action@master
       with:
-        host: "${{ env.host }}"
+        host: ${{ env.host }}
         username: ${{ env.username }}
         key: ${{ env.ssh_private_key }}
         port: 22
