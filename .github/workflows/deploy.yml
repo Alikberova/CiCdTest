@@ -24,9 +24,6 @@ jobs:
       with:
         dotnet-version: 8.0.x
 
-    - name: Ping Server
-      run: ping 5.161.114.219
-
     - name: Restore dependencies
       run: dotnet restore
 
