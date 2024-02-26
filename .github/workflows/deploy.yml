@@ -15,22 +15,9 @@ jobs:
       host: ${{ secrets.HOST }}
       username: ${{ secrets.USER_NAME }}
       ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }}
-      test_var: ${{ secrets.SSH_PRIVATE_KEY }}
 
     steps:
     - uses: actions/checkout@v4
-
-    - name: ECHO
-      run: |
-        echo ${{ env.host }} | sed -e 's/\(.\)/\1 /g'
-        echo env.host| sed -e 's/\(.\)/\1 /g'
-        echo ${{ secrets.HOST }}| sed -e 's/\(.\)/\1 /g'
-
-    - name: Check Secret Length
-      run: |
-        echo "Host Length: ${#HOST}"
-      env:
-        HOST: ${{ secrets.HOST }}
 
     - name: Setup .NET
       uses: actions/setup-dotnet@v4
@@ -49,7 +36,7 @@ jobs:
       run: dotnet test --no-build --verbosity normal
 
     - name: Copy files to Hetzner Server
-      uses: appleboy/scp-action@v0.1.7 #appleboy/scp-action@master
+      uses: appleboy/scp-action@master
       with:
         host: ${{ env.host }}
         username: ${{ env.username }}
