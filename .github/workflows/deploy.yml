@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       app_name: CiCdTest
-      tags: alikberova/CiCdTest:latest 
+      tags: alikberova/cicdtest:latest 
 
     steps:
     - uses: actions/checkout@v4
