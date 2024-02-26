@@ -41,7 +41,7 @@ jobs:
     - name: Copy files to Hetzner Server
       uses: appleboy/scp-action@v0.1.7 #appleboy/scp-action@master
       with:
-        host: ${{ env.host }}
+        host: 5.161.114.219
         username: ${{ env.username }}
         key: ${{ env.ssh_private_key }}
         port: 22
