@@ -28,7 +28,7 @@ jobs:
     
     - name: Build and Publish Application to folder
       run: |
-         msbuild ${{ env.project-name }}\${{ env.project-name }}.csproj /t:publish /p:Configuration=Release /p:PublishReadyToRun=True /p:SelfContained=true /p:PublishSingleFile=true /p:RestorePackages=false
+         msbuild ${{ env.project-name }} /t:publish /p:Configuration=Release /p:RuntimeIdentifier=win-x64 /p:PublishReadyToRun=True /p:SelfContained=true /p:PublishSingleFile=true /p:RestorePackages=false
 
     - name: Log in to Docker Hub
       uses: docker/login-action@v3
