@@ -24,8 +24,8 @@ jobs:
 
     - name: Build and Push Docker Compose services
       run: |
-        docker-compose build
-        docker-compose push
+        docker compose build
+        docker compose push
 
     - name: Create env file
       run: |
