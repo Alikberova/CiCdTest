@@ -7,7 +7,7 @@ WORKDIR /app
 # Re-declare ARG here because ARGs are not available across stages
 ARG APP_NAME
 COPY . .
-RUN dotnet restore "${APP_NAME}/${APP_NAME}.csproj"
+RUN dotnet restore ${APP_NAME}
 
 WORKDIR "/app/${APP_NAME}"
 RUN dotnet publish --no-restore -c Release -o /app/publish

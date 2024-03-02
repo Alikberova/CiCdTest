@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "CiCdTest": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "ENVIRONMENT": "Development"
+      }
+    }
+  }
+}
