@@ -48,6 +48,6 @@ jobs:
         key: ${{ secrets.SSH_PRIVATE_KEY }}
         script: |
           cd /usr/cicdtest
-          docker-compose pull
-          docker-compose down || true
-          docker-compose --env-file /usr/cicdtest/.env up -d
+          docker compose pull
+          docker compose down || true
+          docker compose --env-file /usr/cicdtest/.env up -d

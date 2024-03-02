@@ -8,6 +8,9 @@ var configBuilder = new ConfigurationBuilder()
     .AddUserSecrets(Assembly.GetExecutingAssembly(), true, true)
     .AddEnvironmentVariables();
 
-var val = configBuilder.Build()["secretName"];
+var configuration = configBuilder.Build();
+var val = configuration["secretName"];
+var envVar = Environment.GetEnvironmentVariable("secretName");
 
+Console.WriteLine($"GetEnvironmentVariable is: {envVar}");
 Console.WriteLine($"Hello, World! New value is: {val}");
