@@ -1,11 +1,10 @@
-version: '3.8'
 services:
   webapp:
     build: 
       context: .
       dockerfile: Dockerfile
       args:
-        APP_NAME: ${APP_NAME}
+        APP_NAME: CiCdTest
     image: "alikberova/cicdtest:latest"
     environment:
       - APP_NAME=CiCdTest
