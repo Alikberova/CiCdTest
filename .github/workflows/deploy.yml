@@ -2,7 +2,7 @@ name: .NET Deployment
 
 on:
   push:
-    branches: [ "master", "cicd", "compose"  ]
+    branches: [ "master", "cicd", "env2"  ]
   workflow_dispatch:
 
 jobs:
@@ -24,8 +24,8 @@ jobs:
 
     - name: Build and Push Docker Compose services
       run: |
-        docker compose build
-        docker compose push
+        docker-compose build
+        docker-compose push
 
     - name: Create env file
       run: |
@@ -50,4 +50,4 @@ jobs:
           cd /usr/cicdtest
           docker compose pull
           docker compose down || true
-          docker compose --env-file .env up
+          docker compose up
