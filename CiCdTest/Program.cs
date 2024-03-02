@@ -1,2 +1,12 @@
 ﻿// See https://aka.ms/new-console-template for more information
-Console.WriteLine("Hello, World!");
+
+using Microsoft.Extensions.Configuration;
+using System.Reflection;
+
+var configBuilder = new ConfigurationBuilder()
+    .SetBasePath(AppContext.BaseDirectory)
+    .AddUserSecrets(Assembly.GetExecutingAssembly(), true, true);
+
+var val = configBuilder.Build()["secretName"];
+
+Console.WriteLine($"Hello, World! {val}");
