@@ -32,9 +32,9 @@ jobs:
         username: ${{ secrets.USER_NAME }}
         key: ${{ secrets.SSH_PRIVATE_KEY }}
         source: docker-compose.yml
-        target: /usr/bta
+        target: /usr/cicdtest
         script: |
-          cd /usr/bta
+          cd /usr/btcicdtest
           docker-compose pull
           docker-compose down || true
           docker-compose up -d
