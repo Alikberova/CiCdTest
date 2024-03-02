@@ -5,7 +5,8 @@ using System.Reflection;
 
 var configBuilder = new ConfigurationBuilder()
     .SetBasePath(AppContext.BaseDirectory)
-    .AddUserSecrets(Assembly.GetExecutingAssembly(), true, true);
+    .AddUserSecrets(Assembly.GetExecutingAssembly(), true, true)
+    .AddEnvironmentVariables();
 
 var val = configBuilder.Build()["secretName"];
 
