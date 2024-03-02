@@ -34,7 +34,7 @@ jobs:
         source: docker-compose.yml
         target: /usr/cicdtest
         script: |
-          cd /usr/btcicdtest
+          cd /usr/cicdtest
           docker-compose pull
           docker-compose down || true
           docker-compose up -d
