@@ -6,3 +6,5 @@ services:
       args:
         APP_NAME: CiCdTest
     image: "alikberova/cicdtest:latest"
+    env_file:
+      - /usr/cicdtest/.env
