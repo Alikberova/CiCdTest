@@ -9,4 +9,4 @@ var configBuilder = new ConfigurationBuilder()
 
 var val = configBuilder.Build()["secretName"];
 
-Console.WriteLine($"Hello, World! {val}");
+Console.WriteLine($"Hello, World! New value is: {val}");
