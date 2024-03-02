@@ -2,7 +2,7 @@ name: .NET Deployment
 
 on:
   push:
-    branches: [ "master", "cicd" ]
+    branches: [ "master", "cicd", "compose"  ]
 
 jobs:
   deploy:
